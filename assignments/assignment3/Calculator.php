@@ -25,12 +25,10 @@
                     {
                         if($int2 == 0)
                         {
-                            throw new Exception("The answer is cannot divide a number by zero <br/>");
+                            echo "The answer is cannot divide a number by zero <br/>" ;
                         }
-                        else
-                        {
-                            echo "The quotient of the numbers is " . ($int1 / $int2) . "<br/>";
-                        }
+                        
+                      
                     }
                     else
                     {
