@@ -7,9 +7,10 @@
                 {
                     if($opp === null || $int1 === null || $int2 === null)
                     {
-                        throw new Exception("You must enter a string and two numbers <br/>");
+                        throw new Exception("Cannot perform operation. You must have three arguments. A string for the operator 
+(+,-,*,/) and two integers or floats for the numbers. <br/>");
                     }
-                    else if($opp == "+")
+                    else if($opp == "+" )
                     {
                         echo "The sum of the numbers is " . ($int1 + $int2) . "<br/>";
                     } 
