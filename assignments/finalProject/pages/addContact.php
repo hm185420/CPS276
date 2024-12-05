@@ -5,13 +5,7 @@ require_once('classes/StickyForm.php');
 $stickyForm = new StickyForm();
 
 /*THE INIT FUNCTION IS WRITTEN TO START EVERYTHING OFF IT IS CALLED FROM THE INDEX.PHP PAGE */
-function init()
-{
-    if($_SESSION['access'] !== "accessGranted")
-    {
-        header('Location: index.php?page=login');
-    }
-
+function init(){
     global $elementsArr, $stickyForm;
 
     /* IF THE FORM WAS SUBMITTED DO THE FOLLOWING  */
@@ -117,14 +111,13 @@ $elementsArr =
         "errorOutput"=>"",
         "action"=>"required",
         "type"=>"radio",
-        "value"=>["10-18"=>"", "19-30"=>"", "31-50"=>"", "51+"=>""]
+        "value"=>["10-18"=>"", "19-30"=>"", "30-50"=>"", "51+"=>""]
     ] 
 ];
 
 
 /*THIS FUNCTION CAN BE CALLED TO ADD DATA TO THE DATABASE */
-function addData($post)
-{
+function addData($post) {
     global $elementsArr; 
     
     /* IF EVERYTHING WORKS ADD THE DATA HERE TO THE DATABASE HERE USING THE $_POST SUPER GLOBAL ARRAY */
@@ -136,23 +129,19 @@ function addData($post)
     $sql = "INSERT INTO contactsTable (name, address, city, state, phone, email, dob, contacts, age) VALUES (:name, :address, :city, :state, :phone, :email, :dob, :contacts, :age)";
 
     /* THIS TAKE THE ARRAY OF CHECK BOXES AND PUT THE VALUES INTO A STRING SEPERATED BY COMMAS  */
-    if(isset($_POST['contacts']))
-    {
+    if(isset($_POST['contacts'])){
         $contacts = "";
-        foreach($_POST['contacts'] as $v)
-        {
+        foreach($_POST['contacts'] as $v){
             $contacts .= $v.",";
         }
         /* REMOVE THE LAST COMMA FROM THE CONTACTS */
         $contacts = substr($contacts, 0, -1);
     }
 
-    if(isset($_POST['age']))
-    {
+    if(isset($_POST['age']))  {
         $age = $_POST['age'];
     }
-    else 
-    {
+    else {
         $age = "";
     }
 
@@ -171,20 +160,17 @@ function addData($post)
 
     $result = $pdo->otherBinded($sql, $bindings);
 
-    if($result == "error")
-    {
+    if($result == "error") {
         return getForm("<p>There was a problem processing your form</p>", $elementsArr);
     }
-    else 
-    {
+    else  {
         return getForm("<p>Contact Information Added</p>", $elementsArr);
     }  
 }
    
 
 /*THIS IS THEGET FROM FUCTION WHICH WILL BUILD THE FORM BASED UPON UPON THE (UNMODIFIED OF MODIFIED) ELEMENTS ARRAY. */
-function getForm($acknowledgement, $elementsArr)
-{
+function getForm($acknowledgement, $elementsArr){
 
     global $stickyForm;
     $options = $stickyForm->createOptions($elementsArr['state']);
@@ -208,10 +194,14 @@ function getForm($acknowledgement, $elementsArr)
                 <label for="city">City{$elementsArr['city']['errorOutput']}</label>
                 <input type="text" class="form-control" id="city" name="city" value="{$elementsArr['city']['value']}" >
             </div>
+
             <div class="form-group">
                 <label for="state">State</label>
-                <select class="form-control" id="state" name="state">$options</select>
+                <select class="form-control" id="state" name="state">
+                    $options
+                </select>
             </div>
+
             <div class="form-group">
                 <label for="phone">Phone{$elementsArr['phone']['errorOutput']}</label>
                 <input type="text" class="form-control" id="phone" name="phone" value="{$elementsArr['phone']['value']}" >

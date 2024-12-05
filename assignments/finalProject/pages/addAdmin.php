@@ -55,7 +55,7 @@ $elementsArr =
         "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Name cannot be blank and must be a standard name</span>",
         "errorOutput"=>"",
         "type"=>"text",
-        "value"=>"Scott Shaper",
+        "value"=>"HyoJin",
         "regex"=>"name"
 	],
     "email"=>
@@ -63,7 +63,7 @@ $elementsArr =
         "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be written as a proper email</span>",
         "errorOutput"=>"",
         "type"=>"text",
-        "value"=>"sshaper@admin.com",
+        "value"=>"hmooon3@wccnet.edu",
         "regex"=>"email"
 	],
     "password"=>
@@ -83,23 +83,6 @@ $elementsArr =
     ]
 ];
 
-Function checkEmail($email)
-{
-    require_once "classes/Db_conn.php";
-    $dbconn = new DatabaseConn();
-    $db = $dbconn->dbOpen();
-    $STH = $db->prepare('SELECT email FROM admins');
-    $STH->execute();
-        
-    while($row = $STH->fetch()) 
-    {
-        if($email == ($row['email']))
-        {
-            return 0;
-        }
-    }
-    return 1;
-}
 
 
 /*THIS FUNCTION CAN BE CALLED TO ADD DATA TO THE DATABASE */
@@ -108,13 +91,6 @@ function addData($post)
     global $elementsArr;  
     /* IF EVERYTHING WORKS ADD THE DATA HERE TO THE DATABASE HERE USING THE $_POST SUPER GLOBAL ARRAY */
     //print_r($_POST);
-
-    if(checkEmail($post['email']) == 0)
-    {
-        return getForm("That email already exists", $elementsArr);
-    }
-    else
-    {
         require_once('classes/Pdo_methods.php');
         $pdo = new PdoMethods();
         $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :password, :status)";
@@ -136,7 +112,7 @@ function addData($post)
             return getForm("<p>Admin has been added</p>", $elementsArr);
         }  
     }
-}
+
    
 
 /*THIS IS THEGET FROM FUCTION WHICH WILL BUILD THE FORM BASED UPON UPON THE (UNMODIFIED OF MODIFIED) ELEMENTS ARRAY. */
