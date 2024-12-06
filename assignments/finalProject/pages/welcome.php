@@ -5,7 +5,7 @@ function init(){
     {
         header('Location: index.php?page=login');
     }
-    return ["<h1>Welcome</h1><p>Welcome " . $_SESSION['name']];
+    return ["","<h1>Welcome</h1><p>Welcome " . $_SESSION['name']];
 
 }
 ?>

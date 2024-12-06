@@ -66,13 +66,13 @@ function init()
 }
 
 function getForm($acknowledgement, $elementsArr)
-{
+{	global $stickyForm;
     /* THIS IS A HEREDOC STRING WHICH CREATES THE FORM AND ADD THE APPROPRIATE VALUES AND ERROR MESSAGES */
 	$form = <<<HTML
 		<h1>
 			Login
 		</h1>
-		<p>$acknowledgement</p>
+	 	<p>$acknowledgement</p>
 		<form method="post" action="index.php?page=login">
 			<div class="form-group">
 				<label for="email">Email{$elementsArr['email']['errorOutput']}</label>
@@ -89,7 +89,7 @@ function getForm($acknowledgement, $elementsArr)
 	HTML;
 
     /* HERE I RETURN AN ARRAY THAT CONTAINS AN ACKNOWLEDGEMENT AND THE FORM.  THIS IS DISPLAYED ON THE INDEX PAGE. */
-    return [$form];
+    return [$acknowledgement, $form];
 }
 
 $elementsArr =

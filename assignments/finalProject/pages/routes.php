@@ -69,7 +69,6 @@ if(isset($_GET))
     else if($_GET['page'] === "logout")
     {
         require_once('logout.php');
-        kill_session();
         session_start();
         $_SESSION['access'] = "no";
     }

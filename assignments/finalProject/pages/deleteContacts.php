@@ -1,6 +1,8 @@
 <?php
 function init(){
 
+    //return ["hello world","test"];
+
     if($_SESSION['access'] !== "accessGranted")
     {
         header('Location: index.php?page=login');
@@ -31,6 +33,7 @@ function init(){
         }
     }
     
+
     $output = "";
     
     $pdo = new PdoMethods();
@@ -39,6 +42,8 @@ function init(){
     $sql = "SELECT * FROM contactsTable";
 
     $records = $pdo->selectNotBinded($sql);
+
+    ///return [count($records),"count records"];
 
     if(count($records) === 0){
         $output = "<p>There are no records to display</p>";
@@ -54,6 +59,8 @@ function init(){
         <th>City</th>
         <th>State</th>
         <th>Phone</th>
+        <th>Email</th>
+        <th>DOB</th>
         <th>Contact</th>
          <th>Age</th>
         <th>Delete</th>
@@ -84,8 +91,10 @@ function init(){
         }
     }
     else {
-        $msg="";
+        $msg=""; 
+        ///return [$msg, $output];
     }
-    return [$msg, $output];
+   return [$msg, $output];
+   //return ["test1","test2"]; 
     }
 }

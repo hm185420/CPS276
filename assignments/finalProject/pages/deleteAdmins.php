@@ -90,6 +90,6 @@ function init()
         }
 
         $output .= "</tbody></table></form>";
-        return [$output];
+        return [$msg, $output];
     }
 }

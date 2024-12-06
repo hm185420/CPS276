@@ -6,6 +6,13 @@ $stickyForm = new StickyForm();
 
 /*THE INIT FUNCTION IS WRITTEN TO START EVERYTHING OFF IT IS CALLED FROM THE INDEX.PHP PAGE */
 function init(){
+
+    if($_SESSION['access'] !== "accessGranted")
+    {
+        header('Location: index.php?page=login');
+    }
+
+
     global $elementsArr, $stickyForm;
 
     /* IF THE FORM WAS SUBMITTED DO THE FOLLOWING  */
@@ -239,7 +246,7 @@ function getForm($acknowledgement, $elementsArr){
                 <label class="form-check-label" for="age2">19-30</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="age" id="age3" value="31-50"  {$elementsArr['age']['value']['31-50']}>
+                <input class="form-check-input" type="radio" name="age" id="age3" value="30-50"  {$elementsArr['age']['value']['30-50']}>
                 <label class="form-check-label" for="age3">31-50</label>
             </div>
             <div class="form-check form-check-inline">
@@ -253,6 +260,6 @@ function getForm($acknowledgement, $elementsArr){
     HTML;
 
     /* HERE I RETURN AN ARRAY THAT CONTAINS AN ACKNOWLEDGEMENT AND THE FORM.  THIS IS DISPLAYED ON THE INDEX PAGE. */
-    return [$form];
+    return [$acknowledgement, $form];
 }
 ?>
